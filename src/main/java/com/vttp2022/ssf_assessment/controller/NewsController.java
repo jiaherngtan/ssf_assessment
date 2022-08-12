@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.vttp2022.ssf_assessment.model.Article;
+import com.vttp2022.ssf_assessment.model.ArticleList;
 import com.vttp2022.ssf_assessment.service.NewsService;
 
 @Controller
@@ -24,6 +25,9 @@ public class NewsController {
     @Autowired
     private NewsService ns;
 
+    @Autowired
+    private ArticleList al;
+
     @GetMapping("/")
     public String generateNewsPage(Model model) {
 
@@ -32,10 +36,13 @@ public class NewsController {
             model.addAttribute("articlesList", new LinkedList<Article>());
             return "index";
         }
-        model.addAttribute("articlesList", ns.getArticles().get());
-        // model.addAttribute("articles", new Articles());
+
+        List<Article> articlesList = optArt.get();
+        al.setArticlesList(articlesList);
+
+        model.addAttribute("articlesList", articlesList);
         model.addAttribute("article", new Article());
-        logger.info(">>> articlesList to be displayed: " + ns.getArticles().get());
+        logger.info(">>> articlesList to be displayed: " + articlesList);
 
         return "index";
     }
@@ -43,11 +50,33 @@ public class NewsController {
     @PostMapping("/articles")
     public String selectedArticles(@ModelAttribute Article a) {
 
-        List<String> selectedArticlesList = a.getSelectedArticlesList();
-        logger.info("output of form submission >>> " + selectedArticlesList);
-        // ns.saveArticles(selectedArticlesList);
-        // return "redirect:/";
-        return "index";
+        List<String> selectedListId = a.getSelectedArticlesList();
+        logger.info("output of form submission >>> " + selectedListId);
+        List<String> allListId = new LinkedList<>();
+        List<Article> allList = al.getArticlesList();
+        logger.info(">>> all list: " + allList);
+        for (Article article : allList) {
+            allListId.add(article.getId());
+        }
+        logger.info("all list ids >>> " + allListId);
+        List<Article> selectedList = new LinkedList<>();
+
+        logger.info(">>> " + selectedListId.size());
+        logger.info(">>> " + allList.size());
+
+        for (int i = 0; i < selectedListId.size(); i++) {
+            for (int j = 0; j < allList.size(); j++) {
+                if (selectedListId.get(i) == allList.get(j).getId()) {
+                    logger.info(">>> to add: " + allList.get(j));
+                    selectedList.add(allList.get(j));
+                }
+            }
+        }
+
+        logger.info(">>> selected list: " + selectedList);
+        ns.saveArticles(selectedList);
+
+        return "redirect:/?";
     }
 
 }

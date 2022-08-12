@@ -29,9 +29,6 @@ public class NewsService {
 
     public Optional<List<Article>> getArticles() {
 
-        // https://min-api.cryptocompare.com/data/v2/news/?lang=EN&
-        // api_key=561dba631618abe616d98f2edacfab15821131d0eae701f4c95838eae625ff41
-
         String url = UriComponentsBuilder.fromUriString(URL + "/" + "v2/news/?lang=EN&")
                 .queryParam("api_key", apiKey)
                 .toUriString();

@@ -25,7 +25,7 @@ public class Article {
     private String body;
     private String tags;
     private String categories;
-    private List<String> articlesList;
+    // private List<String> articlesList;
     private List<String> selectedArticlesList;
 
     public String getId() {
@@ -92,13 +92,13 @@ public class Article {
         this.categories = categories;
     }
 
-    public List<String> getArticlesList() {
-        return articlesList;
-    }
+    // public List<String> getArticlesList() {
+    // return articlesList;
+    // }
 
-    public void setArticlesList(List<String> articlesList) {
-        this.articlesList = articlesList;
-    }
+    // public void setArticlesList(List<String> articlesList) {
+    // this.articlesList = articlesList;
+    // }
 
     public List<String> getSelectedArticlesList() {
         return selectedArticlesList;

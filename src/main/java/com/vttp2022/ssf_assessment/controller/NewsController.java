@@ -42,7 +42,6 @@ public class NewsController {
 
         model.addAttribute("articlesList", articlesList);
         model.addAttribute("article", new Article());
-        logger.info(">>> articlesList to be displayed: " + articlesList);
 
         return "index";
     }
@@ -51,6 +50,7 @@ public class NewsController {
     public String selectedArticles(@ModelAttribute Article a) {
 
         List<String> selectedListId = a.getSelectedArticlesList();
+
         logger.info("output of form submission >>> " + selectedListId);
         List<String> allListId = new LinkedList<>();
         List<Article> allList = al.getArticlesList();
@@ -66,13 +66,14 @@ public class NewsController {
 
         for (int i = 0; i < selectedListId.size(); i++) {
             for (int j = 0; j < allList.size(); j++) {
+                logger.info(">>> " + selectedListId.get(i) + "===" + allList.get(j).getId());
                 if (selectedListId.get(i) == allList.get(j).getId()) {
                     logger.info(">>> to add: " + allList.get(j));
                     selectedList.add(allList.get(j));
                 }
             }
         }
-
+        // why selectedList is empty although there is a match?
         logger.info(">>> selected list: " + selectedList);
         ns.saveArticles(selectedList);
 

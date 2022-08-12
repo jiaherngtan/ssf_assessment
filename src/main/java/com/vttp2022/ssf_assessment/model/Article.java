@@ -146,15 +146,9 @@ public class Article {
                 article.setTags(tags);
                 article.setCategories(categories);
 
-                logger.info(">>> id: " + article.getId());
-
                 // add article to list
                 articlesList.add(article);
-                // logger.info(">>> articlesList: " + articlesList);
             }
-            logger.info(">>> articlesList: " + articlesList);
-            // Articles articles = new Articles();
-            // articles.setArticlesList(articlesList);
         }
 
         return articlesList;

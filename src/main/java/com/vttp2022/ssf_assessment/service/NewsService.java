@@ -24,8 +24,7 @@ public class NewsService {
     public static final Logger logger = LoggerFactory.getLogger(NewsService.class);
 
     private static String URL = "https://min-api.cryptocompare.com/data";
-    // private static String apiKey = System.getenv("CRYPTO_COMPARE_API_KEY");
-    private static String apiKey = "ff7f0585134cae218c47c59d4f9ccc6a0032033e82ebb16d1024419b0b252be9";
+    private static String apiKey = System.getenv("CRYPTO_COMPARE_API_KEY");
 
     public Optional<List<Article>> getArticles() {
 
@@ -42,7 +41,6 @@ public class NewsService {
 
         try {
             resp = template.getForEntity(url, String.class);
-            // logger.info(">>> response body: " + resp.getBody());
             articlesList = Article.createJsonGetArticles(resp.getBody());
             return Optional.of(articlesList);
         } catch (Exception e) {

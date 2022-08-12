@@ -25,7 +25,7 @@
                 <p th:text="'Published: ' + *{i.publishedOn}"></p>
                 <a th:href="@{${i.url}}">Link</a>
                 <label for="id">Save</label>
-                <input id="id" th:value="${i}" type="checkbox" name="selectedArticlesList" />
+                <input id="id" th:value="${i.id}" type="checkbox" name="selectedArticlesList" />
                 <hr>
 
             </div>

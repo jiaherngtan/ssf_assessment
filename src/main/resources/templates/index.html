@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto News</title>
+</head>
+
+<body>
+    <h1>Crypto News of the Day</h1>
+
+    <div>
+        <form action="#" th:action="@{/articles}" th:object="${generateObj}" method="post">
+            <input type="submit" value="Save" />
+        </form>
+        <br>
+        <div th:each="i : ${articlesList}">
+            <img th:src="@{${i.imageUrl}}" width="200" height="200">
+            <p th:text="'Id: ' + *{i.id}"></p>
+            <p th:text="*{i.title}"></p>
+            <p th:text="*{i.body}"></p>
+            <p th:text="*{i.categories}"></p>
+            <p th:text="*{i.tags}"></p>
+            <p th:text="*{i.publishedOn}"></p>
+            <a th:href="@{${i.url}}">Link</a>
+            <!-- save checkbox -->
+            <!-- <input type="checkbox" name="myBooleanVariable" th:checked="${myBooleanVariable}" /> -->
+            <label for="id">Save</label>
+            <input id="id" type="checkbox" name="id" />
+            <!-- <label for="gre2">GRE 2</label>
+                <input id="gre2" type="checkbox" name="gre2" th:checked="*{gre2}" /> -->
+
+            <hr>
+        </div>
+    </div>
+
+</body>
+
+</html>

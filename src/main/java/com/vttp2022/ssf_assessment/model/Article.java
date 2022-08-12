@@ -25,7 +25,8 @@ public class Article {
     private String body;
     private String tags;
     private String categories;
-    private boolean checked;
+    private List<String> articlesList;
+    private List<String> selectedArticlesList;
 
     public String getId() {
         return id;
@@ -91,12 +92,20 @@ public class Article {
         this.categories = categories;
     }
 
-    public boolean isChecked() {
-        return checked;
+    public List<String> getArticlesList() {
+        return articlesList;
     }
 
-    public void setChecked(boolean checked) {
-        this.checked = checked;
+    public void setArticlesList(List<String> articlesList) {
+        this.articlesList = articlesList;
+    }
+
+    public List<String> getSelectedArticlesList() {
+        return selectedArticlesList;
+    }
+
+    public void setSelectedArticlesList(List<String> selectedArticlesList) {
+        this.selectedArticlesList = selectedArticlesList;
     }
 
     public static final Logger logger = LoggerFactory.getLogger(Article.class);

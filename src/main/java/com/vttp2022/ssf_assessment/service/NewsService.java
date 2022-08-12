@@ -25,7 +25,7 @@ public class NewsService {
 
     private static String URL = "https://min-api.cryptocompare.com/data";
     // private static String apiKey = System.getenv("CRYPTO_COMPARE_API_KEY");
-    private static String apiKey = "561dba631618abe616d98f2edacfab15821131d0eae701f4c95838eae625ff41";
+    private static String apiKey = "ff7f0585134cae218c47c59d4f9ccc6a0032033e82ebb16d1024419b0b252be9";
 
     public Optional<List<Article>> getArticles() {
 
@@ -54,6 +54,7 @@ public class NewsService {
         return Optional.empty();
     }
 
+    // redis service method
     public void saveArticles(List<Article> articlesList) {
 
         logger.info(">>> articles to be saved on redis: " + articlesList);
@@ -61,6 +62,14 @@ public class NewsService {
         for (Article a : articlesList) {
             redisTemplate.opsForValue().set(a.getId(), a);
         }
+    }
+
+    // redis service method
+    public Article getArticleById(String id) {
+
+        Article article = (Article) redisTemplate.opsForValue().get(id);
+
+        return article;
     }
 
 }

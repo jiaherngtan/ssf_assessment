@@ -12,11 +12,37 @@
     <h1>Crypto News of the Day</h1>
 
     <div>
-        <form action="#" th:action="@{/articles}" th:object="${generateObj}" method="post">
+        th:object="${articles}"
+        <form action="#" th:action="@{/articles}" method="post">
             <input type="submit" value="Save" />
+            <br>
+            <div th:each="i : ${articlesList}">
+                <img th:src="@{${i.imageUrl}}" width="200" height="200">
+                <p th:text="'Id: ' + *{i.id}"></p>
+                <p>Test</p>
+                <p th:text="*{i.title}"></p>
+                <p th:text="*{i.body}"></p>
+                <p th:text="*{i.categories}"></p>
+                <p th:text="*{i.tags}"></p>
+                <p th:text="*{i.publishedOn}"></p>
+                <a th:href="@{${i.url}}">Link</a>
+                <!-- save checkbox -->
+                <!-- <input type="checkbox" name="myBooleanVariable" th:checked="${myBooleanVariable}" /> -->
+
+                <!-- name should be same, value (for display) and id is different -->
+                <div th:object="${article}">
+                    <label for="id">Save</label>
+                    <input id="id" value="i.id" type="checkbox" name="selectedArticlesList" />
+                </div>
+
+                <!-- <label for="gre2">GRE 2</label>
+                    <input id="gre2" type="checkbox" name="gre2" th:checked="*{gre2}" /> -->
+                <hr>
+
+            </div>
         </form>
         <br>
-        <div th:each="i : ${articlesList}">
+        <!-- <div th:each="i : ${articlesList}">
             <img th:src="@{${i.imageUrl}}" width="200" height="200">
             <p th:text="'Id: ' + *{i.id}"></p>
             <p th:text="*{i.title}"></p>
@@ -25,15 +51,10 @@
             <p th:text="*{i.tags}"></p>
             <p th:text="*{i.publishedOn}"></p>
             <a th:href="@{${i.url}}">Link</a>
-            <!-- save checkbox -->
-            <!-- <input type="checkbox" name="myBooleanVariable" th:checked="${myBooleanVariable}" /> -->
             <label for="id">Save</label>
             <input id="id" type="checkbox" name="id" />
-            <!-- <label for="gre2">GRE 2</label>
-                <input id="gre2" type="checkbox" name="gre2" th:checked="*{gre2}" /> -->
-
             <hr>
-        </div>
+        </div> -->
     </div>
 
 </body>

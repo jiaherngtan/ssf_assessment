@@ -10,9 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vttp2022.ssf_assessment.model.Article;
 import com.vttp2022.ssf_assessment.service.NewsService;
@@ -34,17 +33,21 @@ public class NewsController {
             return "index";
         }
         model.addAttribute("articlesList", ns.getArticles().get());
+        // model.addAttribute("articles", new Articles());
+        model.addAttribute("article", new Article());
         logger.info(">>> articlesList to be displayed: " + ns.getArticles().get());
 
         return "index";
     }
 
     @PostMapping("/articles")
-    public String selectedArticles(@RequestBody(required = true) String[] id) {
+    public String selectedArticles(@ModelAttribute Article a) {
 
-        logger.info("output of form submission >>> " + id);
-        // ns.saveArticles(articles);
-        return "redirect:/";
+        List<String> selectedArticlesList = a.getSelectedArticlesList();
+        logger.info("output of form submission >>> " + selectedArticlesList);
+        // ns.saveArticles(selectedArticlesList);
+        // return "redirect:/";
+        return "index";
     }
 
 }
